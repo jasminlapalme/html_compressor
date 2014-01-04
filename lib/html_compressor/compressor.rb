@@ -13,7 +13,7 @@ module HtmlCompressor #:nodoc:
     attr_reader :options
 
     def self.default_options #:nodoc:
-      { :charset => "utf-8", :line_break => nil }
+      { :charset => "utf-8", :line_break => nil, :compress_css => false }
     end
 
     def self.compressor_type #:nodoc:
@@ -111,6 +111,10 @@ module HtmlCompressor #:nodoc:
         end
         from_stream.close
         to_stream.close
+      end
+
+      def command_option_for_compress_css(compress_css)
+        compress_css ? ["--compress-css"] : []
       end
 
       def command_option_for_type
